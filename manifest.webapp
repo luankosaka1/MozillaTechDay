@@ -1,0 +1,13 @@
+{
+	"name": "MozFeed",
+	"description": "Evento - Mozilla Tech Day",
+	"launch_path": "/index.html",
+	"icons": {"68": "/feed-icon.png"},
+	"developer": {
+		"name": "Luan Kosaka",
+		"url": "http://www.luankosaka.com.br"
+	},
+	"permissions": {
+    	"desktop-notification":{}
+	}
+}

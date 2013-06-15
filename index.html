@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Mozilla Tech Day</title>
+        <meta name="description" content="Mozilla Tech Day">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+    </head>
+    <body>
+
+        <br />
+
+        <div class="btn">
+            <i class="icon icon-refresh"></i>
+        </div>
+
+        <div class="btn">
+            <i class="icon icon-info-sign"></i>
+        </div>
+        
+        <h3 align="center">Mozilla Tech Day</h3>
+
+        <div id="container">
+            <p align="center">carregando...</p>
+        </div>
+
+        <script type="text/javascript" src="js/zepto.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script>
+
+            $('.icon-info-sign').click(function(){
+
+                // VIBRATE PHONE ( not found in simulator)
+                //window.navigator.vibrate(200);
+                //navigator.mozVibrate(1000);
+                //navigator.mozVibrate([200, 100, 200, 100]);
+
+                // NOTIFICATION PHONE
+                var notification = navigator.mozNotification;
+                 var n = notification.createNotification("MozFeed", "Novas notícias", "notification.png");
+                n.show();
+
+            }); 
+
+            // RELOAD ARTICLE
+            $('.icon-refresh').click(function(){
+                $('#container').html('<p align="center">carregando...</p>');
+                initialize();
+            });
+
+            // CONFIG GOOGLE FEED
+            google.load("feeds", "1");
+
+            // BUSINESS
+            function initialize() 
+            {
+                var feed = new google.feeds.Feed("http://g1.globo.com/dynamo/rss2.xml");
+
+                feed.load(function(result) {
+
+                    if (!result.error) {
+
+                        var article = "";
+
+                        for (var i = 0; i < result.feed.entries.length; i++) {
+
+                            var entry = result.feed.entries[i];
+
+                            article += "<article>";
+                            article += "<h5>" +entry.title+ "</h5>"
+                            article += "<div><small><i>" +entry.publishedDate+ "</i></small></div>";
+                            article += "<div>" +entry.content+ "</div>";
+                            article += "<article><hr />";
+                        }
+                        $('#container').html('');
+                        $('#container').append(article);
+                    }
+                });
+            }
+            google.setOnLoadCallback(initialize);
+        </script>
+        <script type="text/javascript" src="js/init.js"></script>
+    </body>
+</html>
