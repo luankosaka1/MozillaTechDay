@@ -1,10 +1,10 @@
-==================================================================================
+
 O Que é o Firefox OS?
 ==================================================================================
 
 O Firefox OS é um novo sistema operacional móvel desenvolvido pelo projeto Boot to Gecko (B2G) da Mozilla. Ele usa o Kernel do Linux e inicializa em um sistema baseado no Gecko que permite que os usuários utilizem apps inteiramente desenvolvidos utilizando HTML, Javascript e outras APIs da Web Aberta.
 
-==================================================================================
+
 Arquitetura do Firefox OS
 ==================================================================================
 
@@ -17,16 +17,16 @@ Motor de JS e Renderização de HTML, APIs amigáveis para acesso ao hardware
 - Gonk
 Kernel Linux, Device drivers e camada de abstração do hardware
 
-==================================================================================
+
 Firefox OS Simulator
 ==================================================================================
 
 https://hacks.mozilla.org/2013/03/firefox-os-simulator-previewing-version-3-0/
 
-==================================================================================
+
 Exemplo de manifesto
 ==================================================================================
-
+```
 {
   "name": "Meu App",
   "description": "Minha descrição",
@@ -37,11 +37,13 @@ Exemplo de manifesto
     "url": "http://sua-pagina-aqui.org"
   }
 }
+```
 
-==================================================================================
+
 Instalando apps a partir da web
 ==================================================================================
 
+```
 var installapp = navigator.mozApps.install(manifestURL);
 installapp.onsuccess = function(data) {
   // App foi instalada
@@ -50,8 +52,9 @@ installapp.onerror = function() {
  // App não foi instalada, informações em 
  // installapp.error.name
 };
+```
 
-==================================================================================
+
 Tres níveis de acesso…
 ==================================================================================
 
@@ -64,7 +67,7 @@ verificada pelo Marketplace, utiliza uma Politica de Segurança de Conteúdo, ar
 - Apps certificados
 parte do sistema operacional, apenas para a Mozilla e parceiros.
 
-==================================================================================
+
 Web APIs (apps hospedados)
 ==================================================================================
 
@@ -86,7 +89,7 @@ Notification
 
 https://hacks.mozilla.org/2013/02/using-webapis-to-make-the-web-layer-more-capable/
 
-==================================================================================
+
 Web APIs (apps privilegiadas)
 ==================================================================================
 
@@ -96,7 +99,7 @@ TCP Socket API
 Contacts API
 systemXHR
 
-==================================================================================
+
 Web APIs (certified apps)
 ==================================================================================
 
@@ -115,10 +118,11 @@ Time/Clock API
 Attention screen
 Voicemail
 
-==================================================================================
+
 Contacts API
 ==================================================================================
 
+```
 var contact = new mozContact();
 
 contact.init({name: "Odin"});
@@ -131,8 +135,9 @@ request.onsuccess = function() {
 request.onerror = function() {
 	// não foi possível salvar o contato
 };
+```
 
-==================================================================================
+
 Web Activities
 ==================================================================================
 
@@ -149,32 +154,37 @@ new, exemplo: “websms/sms” or “webcontacts/contact”
 
 https://wiki.mozilla.org/WebAPI/WebActivities
 
-==================================================================================
+
 Discando para um telefone
 ==================================================================================
 
+```
 var call = new MozActivity({
   name: "dial",
   data: {
     number: "26091048"
   }
 });
+```
 
-==================================================================================
+
 Pegando uma imagem
 ==================================================================================
 
+```
 var getphoto = new MozActivity({
   name: "pick",
   data: {
     type: ["image/png", "image/jpg", "image/jpeg"]
   }
 });
+```
 
-==================================================================================
+
 Pegando uma imagem
 ==================================================================================
 
+```
 getphoto.onsuccess = function () {
   var img = document.createElement("img");
   if (this.result.blob.type.indexOf("image") != -1) {
@@ -183,8 +193,9 @@ getphoto.onsuccess = function () {
 };
 getphoto.onerror = function () { // erro!
 };
+```
 
-==================================================================================
+
 Requisitos
 ==================================================================================
 
@@ -196,7 +207,7 @@ Requisitos
 	Brackets (OSX/WIN): http://brackets.io/.
 	SublimeText2 (OSX/WIN/LINUX): http://www.sublimetext.com/.
 
-==================================================================================
+
 Open Web Apps
 ==================================================================================
 
@@ -206,7 +217,6 @@ Open Web Apps suportam mais que apenas o Firefox OS. Elas podem ser instaladas n
     Android via Firefox for Android.
     Desktop via Firefox Aurora.
 
-==================================================================================
 Perguntas & Respostas
 ==================================================================================
 
